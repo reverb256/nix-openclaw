@@ -102,7 +102,7 @@ docker run --rm -p 18789:18789 -v clawdbot-data:/data \
   -e CLAWDBOT_TELEGRAM_BOT_TOKEN="$BOT_TOKEN" \
   -e CLAWDBOT_TELEGRAM_ALLOW_FROM="12345678,-1001234567890" \
   -e CLAWDBOT_ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
-  clawdbot:latest
+  ghcr.io/clawdbot/clawdbot-gateway:latest
 ```
 
 Swap updates with zero downtime: start a new container on the same volume, then stop the old one.

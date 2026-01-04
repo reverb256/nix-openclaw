@@ -1,0 +1,56 @@
+name: Publish Docker Image
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v16
+
+      - name: Use Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Resolve upstream version
+        id: version
+        run: |
+          rev=$(python - <<'PY'
+import re
+from pathlib import Path
+text = Path('nix/sources/clawdbot-source.nix').read_text()
+match = re.search(r'rev\s*=\s*"([^"]+)"', text)
+if not match:
+    raise SystemExit('rev not found in nix/sources/clawdbot-source.nix')
+print(match.group(1))
+PY
+)
+          echo "rev=$rev" >> "$GITHUB_OUTPUT"
+
+      - name: Build image (aarch64-linux)
+        run: nix build .#clawdbot-docker --system aarch64-linux
+
+      - name: Load image
+        run: docker load < result
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Tag and push
+        env:
+          IMAGE: ghcr.io/clawdbot/clawdbot-gateway
+          REV: ${{ steps.version.outputs.rev }}
+        run: |
+          docker tag clawdbot:latest "$IMAGE:latest"
+          docker tag clawdbot:latest "$IMAGE:$REV"
+          docker push "$IMAGE:latest"
+          docker push "$IMAGE:$REV"
