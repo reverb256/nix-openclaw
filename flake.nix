@@ -52,7 +52,7 @@
           gateway-tests = pkgs.callPackage ./nix/checks/clawdbot-gateway-tests.nix {
             sourceInfo = sourceInfoStable;
           };
-          config-schema = pkgs.callPackage ./nix/checks/clawdbot-config-schema.nix {
+          config-options = pkgs.callPackage ./nix/checks/clawdbot-config-options.nix {
             sourceInfo = sourceInfoStable;
           };
         } else {});

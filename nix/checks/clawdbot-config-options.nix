@@ -33,8 +33,8 @@ let
 in
 
 stdenv.mkDerivation (finalAttrs: {
-  pname = "clawdbot-config-schema-check";
-  version = "2026.1.5-3";
+  pname = "clawdbot-config-options";
+  version = "2026.1.7";
 
   src = fetchFromGitHub sourceFetch;
 
@@ -72,14 +72,15 @@ stdenv.mkDerivation (finalAttrs: {
     PROMOTE_PNPM_INTEGRITY_SH = "${../scripts/promote-pnpm-integrity.sh}";
     REMOVE_PACKAGE_MANAGER_FIELD_SH = "${../scripts/remove-package-manager-field.sh}";
     STDENV_SETUP = "${stdenv}/setup";
-    CONFIG_SCHEMA_CHECK_SCRIPT = "${../scripts/config-schema-check.ts}";
-    CONFIG_SCHEMA_SAMPLE_JSON = "${../checks/config-schema-sample.json}";
+    CONFIG_OPTIONS_GENERATOR = "${../scripts/generate-config-options.ts}";
+    CONFIG_OPTIONS_GOLDEN = "${../generated/clawdbot-config-options.nix}";
+    NODE_ENGINE_CHECK = "${../scripts/check-node-engine.ts}";
   };
 
   buildPhase = "${../scripts/gateway-tests-build.sh}";
 
   doCheck = true;
-  checkPhase = "${../scripts/config-schema-check.sh}";
+  checkPhase = "${../scripts/config-options-check.sh}";
 
   installPhase = "${../scripts/empty-install.sh}";
   dontPatchShebangs = true;

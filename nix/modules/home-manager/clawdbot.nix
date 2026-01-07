@@ -4,6 +4,7 @@ let
   cfg = config.programs.clawdbot;
   homeDir = config.home.homeDirectory;
   appPackage = if cfg.appPackage != null then cfg.appPackage else cfg.package;
+  generatedConfigOptions = import ../../generated/clawdbot-config-options.nix { lib = lib; };
 
   mkBaseConfig = workspaceDir: inst: {
     gateway = { mode = "local"; };
@@ -262,6 +263,12 @@ let
         default = {};
         description = "Additional Clawdbot config to merge into the generated JSON.";
       };
+
+      config = lib.mkOption {
+        type = lib.types.submodule { options = generatedConfigOptions; };
+        default = {};
+        description = "Upstream Clawdbot config (generated from schema).";
+      };
     };
   };
 
@@ -279,6 +286,7 @@ let
     systemd = cfg.systemd;
     plugins = cfg.plugins;
     configOverrides = {};
+    config = cfg.config;
     appDefaults = {
       enable = true;
       attachExistingOnly = true;
@@ -685,7 +693,7 @@ let
     baseConfig = mkBaseConfig inst.workspaceDir inst;
     mergedConfig = lib.recursiveUpdate
       (lib.recursiveUpdate baseConfig (lib.recursiveUpdate (mkTelegramConfig inst) (mkRoutingConfig inst)))
-      inst.configOverrides;
+      (lib.recursiveUpdate inst.config inst.configOverrides);
     configJson = builtins.toJSON mergedConfig;
     gatewayWrapper = pkgs.writeShellScriptBin "clawdbot-gateway-${name}" ''
       set -euo pipefail
@@ -1057,6 +1065,12 @@ in {
         default = false;
         description = "Install clawdbot-reload helper for no-sudo config refresh + gateway restart.";
       };
+    };
+
+    config = lib.mkOption {
+      type = lib.types.submodule { options = generatedConfigOptions; };
+      default = {};
+      description = "Upstream Clawdbot config (generated from schema).";
     };
   };
 

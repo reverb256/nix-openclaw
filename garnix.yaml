@@ -6,6 +6,6 @@ builds:
     - "packages.x86_64-linux.clawdbot-stable"
     - "packages.x86_64-linux.clawdbot-gateway-stable"
     - "checks.aarch64-darwin.gateway"
-    - "checks.aarch64-darwin.gateway-tests"
     - "checks.x86_64-linux.gateway"
     - "checks.x86_64-linux.gateway-tests"
+    - "checks.x86_64-linux.config-options"

@@ -38,7 +38,7 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "clawdbot-gateway";
-  version = "2026.1.5-3";
+  version = "2026.1.7";
 
   src = if gatewaySrc != null then gatewaySrc else fetchFromGitHub sourceFetch;
 

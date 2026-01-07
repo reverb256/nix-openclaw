@@ -623,7 +623,7 @@ Pin lives in:
 
 1) **clawdinators updater** proposes a new stable pin.  
 2) **Garnix** builds the package on Linux + macOS and runs `pnpm test` on Linux.  
-   It also validates the Nix config output against the upstream config schema.  
+   It also validates the generated Nix config options against the upstream schema.  
 3) **clawdinators smoke test** runs against real Discord in `#clawdinators-test`.  
 4) If green → promote to stable.  
 5) If red → keep current stable pin.
