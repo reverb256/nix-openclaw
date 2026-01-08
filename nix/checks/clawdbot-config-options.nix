@@ -34,7 +34,7 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "clawdbot-config-options";
-  version = "2026.1.7";
+  version = "2026.1.8-2";
 
   src = fetchFromGitHub sourceFetch;
 
