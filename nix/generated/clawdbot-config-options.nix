@@ -1126,6 +1126,12 @@ in
       };
     }; });
     };
+    remoteCdpHandshakeTimeoutMs = lib.mkOption {
+      type = t.int;
+    };
+    remoteCdpTimeoutMs = lib.mkOption {
+      type = t.int;
+    };
   }; };
   };
 
@@ -2456,6 +2462,16 @@ in
         configWrites = lib.mkOption {
           type = t.bool;
         };
+        customCommands = lib.mkOption {
+          type = t.listOf (t.submodule { options = {
+          command = lib.mkOption {
+            type = t.anything;
+          };
+          description = lib.mkOption {
+            type = t.anything;
+          };
+        }; });
+        };
         dmHistoryLimit = lib.mkOption {
           type = t.int;
         };
@@ -2636,6 +2652,16 @@ in
       };
       configWrites = lib.mkOption {
         type = t.bool;
+      };
+      customCommands = lib.mkOption {
+        type = t.listOf (t.submodule { options = {
+        command = lib.mkOption {
+          type = t.anything;
+        };
+        description = lib.mkOption {
+          type = t.anything;
+        };
+      }; });
       };
       dmHistoryLimit = lib.mkOption {
         type = t.int;
