@@ -4017,14 +4017,26 @@ in
         };
       }; };
       };
+      ask = lib.mkOption {
+        type = t.enum [ "off" "on-miss" "always" ];
+      };
       backgroundMs = lib.mkOption {
         type = t.int;
       };
       cleanupMs = lib.mkOption {
         type = t.int;
       };
+      host = lib.mkOption {
+        type = t.enum [ "sandbox" "gateway" "node" ];
+      };
+      node = lib.mkOption {
+        type = t.str;
+      };
       notifyOnExit = lib.mkOption {
         type = t.bool;
+      };
+      security = lib.mkOption {
+        type = t.enum [ "deny" "allowlist" "full" ];
       };
       timeoutSec = lib.mkOption {
         type = t.int;
