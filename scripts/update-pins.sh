@@ -45,6 +45,9 @@ if ! command -v jq >/dev/null 2>&1; then
   exit 1
 fi
 
+log "Updating nix-steipete-tools input"
+nix flake lock --update-input nix-steipete-tools
+
 log "Resolving moltbot main SHAs"
 mapfile -t candidate_shas < <(gh api /repos/moltbot/moltbot/commits?per_page=10 | jq -r '.[].sha' || true)
 if [[ ${#candidate_shas[@]} -eq 0 ]]; then
@@ -227,7 +230,7 @@ if git diff --quiet; then
 fi
 
 log "Committing updated pins"
-git add "$source_file" "$app_file" "$repo_root/nix/generated/moltbot-config-options.nix"
+git add "$source_file" "$app_file" "$repo_root/nix/generated/moltbot-config-options.nix" "$repo_root/flake.lock"
 git commit -F - <<'EOF'
 🤖 codex: bump moltbot pins (no-issue)
 
