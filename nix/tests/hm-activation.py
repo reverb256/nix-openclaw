@@ -11,8 +11,11 @@ machine.succeed("loginctl enable-linger alice")
 machine.succeed(f"systemctl start user@{uid}.service")
 machine.wait_for_unit(f"user@{uid}.service")
 
-machine.succeed("su - alice -c 'systemctl --user daemon-reload'")
-machine.succeed("su - alice -c 'systemctl --user start openclaw-gateway.service'")
+machine.wait_until_succeeds("test -S /run/user/1000/bus")
+
+user_env = "XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+machine.succeed(f"su - alice -c '{user_env} systemctl --user daemon-reload'")
+machine.succeed(f"su - alice -c '{user_env} systemctl --user start openclaw-gateway.service'")
 machine.wait_for_unit("openclaw-gateway.service", user="alice")
 
 machine.wait_for_open_port(18999)
