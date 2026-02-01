@@ -2626,6 +2626,19 @@ in
           type = t.nullOr (t.str);
           default = null;
         };
+        pluralkit = lib.mkOption {
+          type = t.nullOr (t.submodule { options = {
+          enabled = lib.mkOption {
+            type = t.nullOr (t.bool);
+            default = null;
+          };
+          token = lib.mkOption {
+            type = t.nullOr (t.str);
+            default = null;
+          };
+        }; });
+          default = null;
+        };
         replyToMode = lib.mkOption {
           type = t.nullOr (t.oneOf [ (t.enum [ "off" ]) (t.enum [ "first" ]) (t.enum [ "all" ]) ]);
           default = null;
@@ -3031,6 +3044,19 @@ in
       };
       name = lib.mkOption {
         type = t.nullOr (t.str);
+        default = null;
+      };
+      pluralkit = lib.mkOption {
+        type = t.nullOr (t.submodule { options = {
+        enabled = lib.mkOption {
+          type = t.nullOr (t.bool);
+          default = null;
+        };
+        token = lib.mkOption {
+          type = t.nullOr (t.str);
+          default = null;
+        };
+      }; });
         default = null;
       };
       replyToMode = lib.mkOption {
