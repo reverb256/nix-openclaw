@@ -2,7 +2,7 @@
 {
   owner = "reverb256";
   repo = "openclaw";
-  rev = "9f70516b3c321b2e0a8bc72b853a3e4cb7b822e0";
-  hash = "sha256-KRP+bE2RUr5yLZS70Wt3T/2JU7ROWp6uEMtC7uyWoAQ=";
-  pnpmDepsHash = "sha256-TODO-REPLACE-WITH-CALCULATED-HASH";
+  rev = "ca17d6048fe9eac6144a15c4e2dd1cdf1649703f";
+  hash = "sha256-1VWM1BnI1GvclYBky5f5Y9HqeThmQUwCWQbsFQM1Eu0=";
+  pnpmDepsHash = null; # Let Nix calculate this on first build
 }
