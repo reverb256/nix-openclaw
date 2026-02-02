@@ -31,6 +31,9 @@ except Exception:
         f"su - alice -c '{user_env} systemctl --user show openclaw-gateway.service -p ActiveState -p SubState -p ExecMainCode -p ExecMainStatus -p MainPID --no-pager 2>&1' || true"
     )
     machine.succeed(
+        f"su - alice -c '{user_env} systemctl --user show openclaw-gateway.service -p Environment --no-pager 2>&1' || true"
+    )
+    machine.succeed(
         f"su - alice -c '{user_env} systemctl --user cat openclaw-gateway.service --no-pager 2>&1' || true"
     )
     machine.succeed(
