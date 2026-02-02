@@ -4,5 +4,5 @@
   repo = "openclaw";
   rev = "945f6a91ba2f59b5329ca1d2c7c1143e2e147acd";
   hash = "sha256-s5GQgXqPOBi2IcBj/VQLWfLC7VULIaf23NU7rXSCNYw=";
-  pnpmDepsHash = null; # Let Nix calculate this on first build
+  pnpmDepsHash = "sha256-WpKaXEr7PYFaZYA+1auUE5ys2wMxqZrdeLZlTXnU7ic=";
 }
