@@ -1,8 +1,8 @@
-# Pinned Openclaw source for nix-openclaw
+# Pinned Openclaw source for nix-openclaw (pointing to our fork with hasown fix)
 {
-  owner = "openclaw";
+  owner = "reverb256";
   repo = "openclaw";
-  rev = "4ab814fd50c677c4658418ced2a8fb99a19928d2";
-  hash = "sha256-cJECMZvi6jfeW7hL4TgLgPd1ApZqtJQv9xVr5rwM45E=";
-  pnpmDepsHash = "sha256-WpKaXEr7PYFaZYA+1auUE5ys2wMxqZrdeLZlTXnU7ic=";
+  rev = "9f70516b3c321b2e0a8bc72b853a3e4cb7b822e0";
+  hash = "sha256-KRP+bE2RUr5yLZS70Wt3T/2JU7ROWp6uEMtC7uyWoAQ=";
+  pnpmDepsHash = "sha256-TODO-REPLACE-WITH-CALCULATED-HASH";
 }
